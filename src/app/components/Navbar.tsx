@@ -56,7 +56,15 @@ const Navbar = () => {
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <Button className="rounded-full md:block hidden hover:bg-purple-700 bg-mainPurple transition-colors duration-300">
-            Contact Us
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleMenuClick("contact");
+              }}
+            >
+              Contact Us
+            </a>
           </Button>
           <button
             type="button"

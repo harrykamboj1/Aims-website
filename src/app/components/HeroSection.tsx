@@ -2,6 +2,14 @@
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
+  const handleMenuClick = (menu: string) => {
+    // Smooth scroll to the section
+    const section = document.getElementById(menu.toLowerCase());
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       id="home"
@@ -37,7 +45,15 @@ const HeroSection = () => {
           whileHover={{ scale: 1.05, backgroundColor: "#6A35C2" }}
           whileTap={{ scale: 0.95 }}
         >
-          Contact Us
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              handleMenuClick("contact");
+            }}
+          >
+            Contact Us
+          </a>
         </motion.button>
         <motion.button
           className="px-6 py-3 border-2 border-mainPurple text-mainPurple rounded-full"
@@ -47,7 +63,15 @@ const HeroSection = () => {
           }}
           whileTap={{ scale: 0.95 }}
         >
-          Learn More
+          <a
+            href="#services"
+            onClick={(e) => {
+              e.preventDefault();
+              handleMenuClick("services");
+            }}
+          >
+            Services
+          </a>
         </motion.button>
       </motion.div>
     </section>
