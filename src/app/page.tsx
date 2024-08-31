@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
 import { Bars } from "react-loader-spinner";
-import CarouselSection from "./components/Carousel";
+import Gallery from "./components/Gallery";
+import Services from "./components/Services";
+import ContactForm from "./components/ContactForm";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const [loading, setIsLoading] = useState(true);
@@ -34,7 +37,10 @@ export default function Home() {
     <div>
       <Navbar />
       <HeroSection />
-      <CarouselSection />
+      <Gallery />
+      <Services />
+      <ContactForm />
+      <Footer />
     </div>
   );
 }

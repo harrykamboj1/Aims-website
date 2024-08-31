@@ -3,7 +3,10 @@ import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="bg-gradient-to-bl from-white via-[#f6f4f8] to-lightPink h-screen flex flex-col items-center justify-center">
+    <section
+      id="home"
+      className="bg-gradient-to-bl from-white via-[#f6f4f8] to-lightPink h-screen flex flex-col items-center justify-center"
+    >
       {/* Animated Heading */}
       <motion.h1
         className="text-5xl md:text-7xl font-bold text-center mb-8"

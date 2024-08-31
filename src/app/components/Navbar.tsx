@@ -31,6 +31,12 @@ const Navbar = () => {
   const handleMenuClick = (menu: string) => {
     setActiveMenu(menu);
     setIsMenuOpen(false);
+
+    // Smooth scroll to the section
+    const section = document.getElementById(menu.toLowerCase());
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -94,11 +100,14 @@ const Navbar = () => {
                 : "bg-white md:bg-transparent"
             }`}
           >
-            {["Home", "About", "Services", "Contact"].map((item) => (
+            {["Home", "Gallery", "Services", "Contact"].map((item) => (
               <li key={item}>
                 <a
                   href={`#${item.toLowerCase()}`}
-                  onClick={() => handleMenuClick(item)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleMenuClick(item);
+                  }}
                   className={`block py-2 px-3 rounded-md transition-colors duration-300 ${
                     activeMenu === item
                       ? "bg-mainPurple text-white"

@@ -10,7 +10,7 @@ import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
 
-const CarouselSection = () => {
+const Gallery = () => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -29,6 +29,7 @@ const CarouselSection = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
+      id="gallery"
     >
       <motion.div
         className="container mx-auto px-4"
@@ -81,4 +82,4 @@ const CarouselSection = () => {
   );
 };
 
-export default CarouselSection;
+export default Gallery;
