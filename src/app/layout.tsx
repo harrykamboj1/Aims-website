@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AIMS (IELTS,PTE,FRENCH)",
-  description: "",
+  title: "AIMS",
+  description: "IELTS,PTE,FRENCH",
 };
 
 export default function RootLayout({

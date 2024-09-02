@@ -4,6 +4,8 @@ import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <div>
       <footer className="mt-16 bg-white py-8">
@@ -11,7 +13,7 @@ const Footer = () => {
           <div className="flex flex-wrap justify-between items-center">
             <div className="w-full md:w-1/3 mb-4 md:mb-0">
               <p className="text-gray-600">
-                &copy; 2023 AIMS. All rights reserved.
+                &copy; {currentYear} AIMS. All rights reserved.
               </p>
             </div>
             <div className="w-full md:w-1/3 mb-4 md:mb-0 text-center">
