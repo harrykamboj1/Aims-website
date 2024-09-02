@@ -40,8 +40,9 @@ const ContactForm = () => {
               href="https://www.instagram.com/aims_604/"
               text="@aims_604"
             />
-            <ContactItem icon={MapPin} text="Surrey, Canada" />
+            <ContactItem href="" icon={MapPin} text="Surrey, Canada" />
             <ContactItem
+              href={""}
               icon={Phone}
               text={
                 <>
@@ -78,7 +79,7 @@ const ContactForm = () => {
   );
 };
 
-const ContactItem = ({ icon: Icon, href, text }) => (
+const ContactItem = ({ icon: Icon, href, text }: any) => (
   <motion.div
     whileHover={{ scale: 1.05 }}
     className="flex items-center space-x-4"
@@ -99,7 +100,7 @@ const ContactItem = ({ icon: Icon, href, text }) => (
   </motion.div>
 );
 
-const SocialIcon = ({ href, icon: Icon }) => (
+const SocialIcon = ({ href, icon: Icon }: any) => (
   <motion.a
     href={href}
     className="text-gray-600 hover:text-mainPurple transition duration-300"
