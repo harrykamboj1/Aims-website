@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
+import { testimonials } from "../data/data";
 
 const Gallery = () => {
   const [scrollY, setScrollY] = useState(0);

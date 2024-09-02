@@ -7,6 +7,7 @@ import Gallery from "./components/Gallery";
 import Services from "./components/Services";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
+import Testimonial from "./components/testimonial";
 
 export default function Home() {
   const [loading, setIsLoading] = useState(true);
@@ -38,6 +39,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <Gallery />
+      <Testimonial />
       <Services />
       <ContactForm />
       <Footer />

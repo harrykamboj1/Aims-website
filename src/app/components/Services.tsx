@@ -9,7 +9,13 @@ import {
   MapPin,
 } from "lucide-react";
 
-const ServiceCard = ({ icon: Icon, title, description }) => (
+interface ServiceCardProps {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}
+
+const ServiceCard = ({ icon: Icon, title, description }: ServiceCardProps) => (
   <motion.div
     className="bg-white p-6 rounded-lg shadow-md"
     whileHover={{ scale: 1.05 }}
