@@ -3,7 +3,7 @@ export const testimonials = [
     name: "Aashita sharma",
     stars: 5,
     review:
-      "I am learning French from Simran mam from last 5 months. The way she explains each and everything makes the things so easy to understand. She always maintains the postive atmosphere in the class so that students feel themselves motivated and supported. Highly recommend to every one to take the opportunity to study Ielts / French from the AIMS. Best institute ⭐️😇",
+      "I am learning French from Simran mam from last 5 months. The way she explains each and everything makes the things so easy to understand. Highly recommend to every one to take the opportunity to study Ielts / French from the AIMS. Best institute ⭐️😇",
   },
   {
     name: "Amandeep Kaur",

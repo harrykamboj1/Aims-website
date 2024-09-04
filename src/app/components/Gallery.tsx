@@ -21,6 +21,8 @@ const Gallery = () => {
 
   const autoplayOptions = {
     delay: 3000,
+    stopOnInteraction: false,
+    stopOnFocusIn: false,
   };
 
   return (

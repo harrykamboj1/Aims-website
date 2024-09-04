@@ -12,6 +12,8 @@ import Autoplay from "embla-carousel-autoplay";
 const Testimonial = () => {
   const autoplayOptions = {
     delay: 3000,
+    stopOnInteraction: false,
+    stopOnFocusIn: false,
   };
 
   return (
@@ -35,7 +37,7 @@ const Testimonial = () => {
                 className="sm:basis-2/3 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 pl-4"
               >
                 <motion.div
-                  className="bg-white p-8 rounded-lg shadow-md h-64 flex flex-col justify-between m-2"
+                  className="bg-white p-8 rounded-lg shadow-md h-72 flex flex-col justify-between m-2"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -53,7 +55,7 @@ const Testimonial = () => {
                         />
                       ))}
                     </div>
-                    <p className="text-gray-600 mb-3 text-sm line-clamp-3">
+                    <p className="text-gray-600 mb-3 text-sm">
                       {testimonial.review}
                     </p>
                   </div>
