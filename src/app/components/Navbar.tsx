@@ -1,8 +1,8 @@
-// Navbar.tsx
 "use client";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,18 +11,13 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrolled]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -31,107 +26,132 @@ const Navbar = () => {
   const handleMenuClick = (menu: string) => {
     setActiveMenu(menu);
     setIsMenuOpen(false);
-
-    // Smooth scroll to the section
     const section = document.getElementById(menu.toLowerCase());
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
+  const navItems = [
+    { name: "Home", href: "#home" },
+    { name: "Services", href: "#services" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "Testimonials", href: "#testimonials" },
+    { name: "Contact", href: "#contact" },
+  ];
+
   return (
     <nav
-      className={`fixed w-full z-20 top-0 left-0 transition-all duration-300 ${
-        scrolled ? "bg-white shadow-md" : "bg-white"
+      className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur-md shadow-lg"
+          : "bg-white/80 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/" className="flex items-center">
-          <Image
-            src="/AIMS_LIGHT.png"
-            alt="AIMS Logo"
-            width={150}
-            height={50}
-          />
-        </a>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <Button className="rounded-full md:block hidden hover:bg-purple-700 bg-mainPurple transition-colors duration-300">
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                handleMenuClick("contact");
-              }}
+      <div className="container-custom">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <motion.a
+            href="/"
+            className="flex items-center space-x-2"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="flex items-center space-x-2">
+              {/* Logo Icon/Shape */}
+              <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center shadow-md">
+                <span className="text-white font-heading font-bold text-xl">
+                  A
+                </span>
+              </div>
+              {/* Logo Text */}
+              <div className="flex flex-col">
+                <span className="text-2xl font-heading font-bold gradient-text leading-none">
+                  AIMS
+                </span>
+                <span className="text-xs text-gray-500 font-medium leading-none mt-0.5">
+                  Education
+                </span>
+              </div>
+            </div>
+          </motion.a>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => handleMenuClick(item.name)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  activeMenu === item.name
+                    ? "bg-primary text-white shadow-md"
+                    : "text-gray-700 hover:text-primary hover:bg-primary/10"
+                }`}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <Button
+              onClick={() => handleMenuClick("Contact")}
+              className="gradient-primary text-white hover:opacity-90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-full px-6 py-2.5 font-semibold"
             >
-              Contact Us
-            </a>
-          </Button>
+              Get Started
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
           <button
             type="button"
-            className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-mainPurple ${
-              scrolled
-                ? "text-gray-500 hover:bg-purple-100"
-                : "text-gray-500 hover:bg-gray-100"
-            }`}
-            aria-controls="navbar-sticky"
-            aria-expanded={isMenuOpen}
+            className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
             onClick={toggleMenu}
+            aria-label="Toggle menu"
           >
-            <span className="sr-only">Toggle menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="false"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
+            {isMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
-        <div
-          className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
-            isMenuOpen ? "block" : "hidden"
-          }`}
-          id="navbar-sticky"
-        >
-          <ul
-            className={`flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ${
-              scrolled
-                ? "bg-white md:bg-transparent"
-                : "bg-white md:bg-transparent"
-            }`}
-          >
-            {["Home", "Gallery", "Services", "Contact"].map((item) => (
-              <li key={item}>
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleMenuClick(item);
-                  }}
-                  className={`block py-2 px-3 rounded-md transition-colors duration-300 ${
-                    activeMenu === item
-                      ? "bg-mainPurple text-white"
-                      : scrolled
-                      ? "text-gray-900 hover:bg-purple-100"
-                      : "text-gray-900 hover:bg-gray-100"
-                  }`}
-                  aria-current={activeMenu === item ? "page" : undefined}
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white border-t border-gray-200"
+          >
+            <div className="container-custom py-4 space-y-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.name}
+                  onClick={() => handleMenuClick(item.name)}
+                  className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all ${
+                    activeMenu === item.name
+                      ? "bg-primary text-white"
+                      : "text-gray-700 hover:bg-primary/10 hover:text-primary"
+                  }`}
+                >
+                  {item.name}
+                </button>
+              ))}
+              <Button
+                onClick={() => handleMenuClick("Contact")}
+                className="w-full mt-4 gradient-primary text-white rounded-full py-3 font-semibold"
+              >
+                Get Started
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

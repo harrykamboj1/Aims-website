@@ -27,18 +27,22 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        lightPink: "#f5e7fe",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        mainPurple: {
-          DEFAULT: "#7D41E1",
+          DEFAULT: "hsl(var(--primary-blue))",
+          dark: "hsl(var(--primary-blue-dark))",
+          light: "hsl(var(--primary-blue-light))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent-indigo))",
+          dark: "hsl(var(--accent-indigo-dark))",
+          teal: "hsl(var(--accent-teal))",
+          "teal-light": "hsl(var(--accent-teal-light))",
+          foreground: "hsl(var(--accent-foreground))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -48,9 +52,11 @@ const config = {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+        success: {
+          DEFAULT: "hsl(var(--success-green))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning-orange))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -60,6 +66,13 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Legacy support
+        mainPurple: "hsl(var(--primary-blue))",
+        lightPink: "hsl(var(--primary-blue-light))",
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)", "sans-serif"],
+        heading: ["var(--font-poppins)", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
