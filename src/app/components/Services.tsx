@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   Monitor,
   BookOpen,
@@ -12,9 +13,9 @@ import {
   Clock,
   Award,
   Globe,
-  MessageSquare,
   CheckCircle2,
   FileText,
+  ArrowRight,
 } from "lucide-react";
 
 interface ServiceCardProps {
@@ -23,6 +24,7 @@ interface ServiceCardProps {
   description: string;
   features: string[];
   index: number;
+  link?: string;
 }
 
 const ServiceCard = ({
@@ -31,6 +33,7 @@ const ServiceCard = ({
   description,
   features,
   index,
+  link,
 }: ServiceCardProps) => (
   <motion.div
     initial={{ opacity: 0, y: 50 }}
@@ -58,7 +61,7 @@ const ServiceCard = ({
       <p className="text-gray-600 mb-6 leading-relaxed">{description}</p>
 
       {/* Features */}
-      <ul className="space-y-3">
+      <ul className="space-y-3 mb-6">
         {features.map((feature, idx) => (
           <li key={idx} className="flex items-start space-x-3">
             <CheckCircle2 className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
@@ -66,6 +69,17 @@ const ServiceCard = ({
           </li>
         ))}
       </ul>
+
+      {/* Learn More Link */}
+      {link && (
+        <Link
+          href={link}
+          className="inline-flex items-center space-x-2 text-primary font-semibold hover:text-primary-dark transition-colors group/link"
+        >
+          <span>Learn More</span>
+          <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+        </Link>
+      )}
     </div>
   </motion.div>
 );
@@ -83,6 +97,7 @@ const Services = () => {
         "Personalized feedback",
         "Flexible schedules",
       ],
+      link: "/ielts-training",
     },
     {
       icon: BookOpen,
@@ -95,6 +110,7 @@ const Services = () => {
         "Expert guidance",
         "Online & offline options",
       ],
+      link: "/pte-training",
     },
     {
       icon: FileText,
@@ -107,6 +123,7 @@ const Services = () => {
         "Practice tests & feedback",
         "Immigration-focused curriculum",
       ],
+      link: "/celpip-training",
     },
     {
       icon: GraduationCap,
@@ -119,6 +136,7 @@ const Services = () => {
         "Conversational practice",
         "Cultural immersion",
       ],
+      link: "/french-training",
     },
     {
       icon: Plane,

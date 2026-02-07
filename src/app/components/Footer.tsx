@@ -54,19 +54,19 @@ const Footer = () => {
             <Link href="/" className="inline-block mb-6">
               <div className="flex items-center space-x-2">
                 {/* Logo Icon/Shape */}
-                <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center shadow-md">
+                <div className="w-24 h-12 gradient-primary rounded-lg flex items-center justify-center shadow-md">
                   <span className="text-white font-heading font-bold text-2xl">
-                    A
+                    aims
                   </span>
                 </div>
                 {/* Logo Text */}
                 <div className="flex flex-col">
-                  <span className="text-2xl font-heading font-bold text-white leading-none">
-                    AIMS
-                  </span>
-                  <span className="text-sm text-gray-400 font-medium leading-none mt-0.5">
+                  {/* <span className="text-2xl font-heading font-bold text-white leading-none">
+                    aims
+                  </span> */}
+                  {/* <span className="text-sm text-gray-400 font-medium leading-none mt-0.5">
                     Education
-                  </span>
+                  </span> */}
                 </div>
               </div>
             </Link>
@@ -173,7 +173,7 @@ const Footer = () => {
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              &copy; {currentYear} AIMS Education. All rights reserved.
+              &copy; {currentYear} aims. All rights reserved.
             </p>
             <div className="flex items-center space-x-2 text-gray-400 text-sm">
               <span>Made with</span>

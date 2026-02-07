@@ -23,7 +23,7 @@ const Gallery = () => {
   const images = Array.from({ length: 15 }, (_, i) => ({
     id: i + 1,
     src: `/aims_image_${i + 1}.jpeg`,
-    alt: `AIMS Education Gallery Image ${i + 1}`,
+    alt: `AIMS Gallery Image ${i + 1}`,
   }));
 
   return (

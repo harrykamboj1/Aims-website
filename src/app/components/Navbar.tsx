@@ -67,11 +67,11 @@ const Navbar = () => {
               {/* Logo Text */}
               <div className="flex flex-col">
                 <span className="text-2xl font-heading font-bold gradient-text leading-none">
-                  AIMS
+                  Aims
                 </span>
-                <span className="text-xs text-gray-500 font-medium leading-none mt-0.5">
+                {/* <span className="text-xs text-gray-500 font-medium leading-none mt-0.5">
                   Education
-                </span>
+                </span> */}
               </div>
             </div>
           </motion.a>
