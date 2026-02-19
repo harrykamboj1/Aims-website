@@ -47,7 +47,7 @@ export default function Home() {
       <Services />
       <Gallery />
       <Testimonial />
-      <ContactForm />
+      {/* <ContactForm /> */}
       <Footer />
     </main>
   );
