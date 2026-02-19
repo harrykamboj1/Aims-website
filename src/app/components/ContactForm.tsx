@@ -204,7 +204,7 @@ const ContactForm = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl border border-gray-100">
+            {/* <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl border border-gray-100">
               <div className="flex items-center space-x-3 mb-8">
                 <div className="p-3 gradient-primary rounded-xl">
                   <Send className="w-6 h-6 text-white" />
@@ -215,7 +215,6 @@ const ContactForm = () => {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name Field */}
                 <div className="relative">
                   <label
                     htmlFor="name"
@@ -238,7 +237,6 @@ const ContactForm = () => {
                   </div>
                 </div>
 
-                {/* Email Field */}
                 <div className="relative">
                   <label
                     htmlFor="email"
@@ -261,7 +259,6 @@ const ContactForm = () => {
                   </div>
                 </div>
 
-                {/* Phone Field */}
                 <div className="relative">
                   <label
                     htmlFor="phone"
@@ -284,7 +281,6 @@ const ContactForm = () => {
                   </div>
                 </div>
 
-                {/* Service Selection */}
                 <div className="relative">
                   <label
                     htmlFor="service"
@@ -327,7 +323,6 @@ const ContactForm = () => {
                   </div>
                 </div>
 
-                {/* Message Field */}
                 <div className="relative">
                   <label
                     htmlFor="message"
@@ -347,7 +342,6 @@ const ContactForm = () => {
                   />
                 </div>
 
-                {/* Status Messages */}
                 <AnimatePresence mode="wait">
                   {status === "success" && (
                     <motion.div
@@ -377,7 +371,6 @@ const ContactForm = () => {
                   )}
                 </AnimatePresence>
 
-                {/* Submit Button */}
                 <motion.button
                   type="submit"
                   disabled={status === "loading"}
@@ -398,7 +391,7 @@ const ContactForm = () => {
                   )}
                 </motion.button>
               </form>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Contact Information */}
