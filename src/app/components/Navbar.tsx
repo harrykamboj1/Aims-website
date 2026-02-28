@@ -3,11 +3,14 @@ import { Button } from "@/components/ui/button";
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState("Home");
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,27 +29,33 @@ const Navbar = () => {
   const handleMenuClick = (menu: string) => {
     setActiveMenu(menu);
     setIsMenuOpen(false);
-    const section = document.getElementById(menu.toLowerCase());
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    const sectionId = menu.toLowerCase();
+
+    if (pathname === "/") {
+      // On home page, scroll to section directly
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // On subpages, navigate to home page with hash
+      router.push(`/#${sectionId}`);
     }
   };
 
   const navItems = [
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
-    { name: "Gallery", href: "#gallery" },
     { name: "Testimonials", href: "#testimonials" },
     { name: "Contact", href: "#contact" },
   ];
 
   return (
     <nav
-      className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${
-        scrolled
+      className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${scrolled
           ? "bg-white/95 backdrop-blur-md shadow-lg"
           : "bg-white/80 backdrop-blur-sm"
-      }`}
+        }`}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-20">
@@ -82,11 +91,10 @@ const Navbar = () => {
               <button
                 key={item.name}
                 onClick={() => handleMenuClick(item.name)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  activeMenu === item.name
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${activeMenu === item.name
                     ? "bg-primary text-white shadow-md"
                     : "text-gray-700 hover:text-primary hover:bg-primary/10"
-                }`}
+                  }`}
               >
                 {item.name}
               </button>
@@ -133,11 +141,10 @@ const Navbar = () => {
                 <button
                   key={item.name}
                   onClick={() => handleMenuClick(item.name)}
-                  className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all ${
-                    activeMenu === item.name
+                  className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all ${activeMenu === item.name
                       ? "bg-primary text-white"
                       : "text-gray-700 hover:bg-primary/10 hover:text-primary"
-                  }`}
+                    }`}
                 >
                   {item.name}
                 </button>

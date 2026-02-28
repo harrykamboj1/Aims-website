@@ -195,212 +195,14 @@ const ContactForm = () => {
           </p>
         </motion.div>
 
-        {/* Main Content Grid */}
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+        {/* Contact Information */}
+        <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-          >
-            {/* <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl border border-gray-100">
-              <div className="flex items-center space-x-3 mb-8">
-                <div className="p-3 gradient-primary rounded-xl">
-                  <Send className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-2xl font-heading font-bold text-gray-900">
-                  Send Us a Message
-                </h3>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="relative">
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Full Name *
-                  </label>
-                  <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter your full name"
-                      className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-gray-900 placeholder:text-gray-400"
-                    />
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Email Address *
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter your email address"
-                      className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-gray-900 placeholder:text-gray-400"
-                    />
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Phone Number *
-                  </label>
-                  <div className="relative">
-                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Enter your phone number"
-                      className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-gray-900 placeholder:text-gray-400"
-                    />
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="service"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Service Interested In *
-                  </label>
-                  <div className="relative">
-                    <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <select
-                      id="service"
-                      name="service"
-                      value={formData.service}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-gray-900 appearance-none cursor-pointer"
-                    >
-                      <option value="">Select a service</option>
-                      {services.map((service) => (
-                        <option key={service} value={service}>
-                          {service}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg
-                        className="w-5 h-5 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Your Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    rows={4}
-                    placeholder="Tell us about your goals and how we can help..."
-                    className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-gray-900 placeholder:text-gray-400 resize-none"
-                  />
-                </div>
-
-                <AnimatePresence mode="wait">
-                  {status === "success" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="flex items-center space-x-3 p-4 bg-green-50 border border-green-200 rounded-xl"
-                    >
-                      <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
-                      <p className="text-green-700 font-medium">
-                        Thank you! Your message has been sent successfully.
-                        We&apos;ll get back to you soon!
-                      </p>
-                    </motion.div>
-                  )}
-
-                  {status === "error" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="flex items-center space-x-3 p-4 bg-red-50 border border-red-200 rounded-xl"
-                    >
-                      <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
-                      <p className="text-red-700 font-medium">{errorMessage}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                <motion.button
-                  type="submit"
-                  disabled={status === "loading"}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 px-8 gradient-primary text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-                >
-                  {status === "loading" ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      <span>Sending...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      <span>Send Message</span>
-                    </>
-                  )}
-                </motion.button>
-              </form>
-            </div> */}
-          </motion.div>
-
-          {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
+            className="grid md:grid-cols-2 gap-8"
           >
             {/* Locations Section */}
             <div className="bg-white rounded-2xl p-8 shadow-xl">
@@ -443,23 +245,17 @@ const ContactForm = () => {
                 />
               </div>
             </div>
+          </motion.div>
 
-            {/* Email Section */}
-            {/* <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h3 className="text-2xl font-heading font-bold mb-6 text-gray-900 flex items-center space-x-2">
-                <Mail className="w-6 h-6 text-primary" />
-                <span>Email Us</span>
-              </h3>
-              <ContactItem
-                icon={Mail}
-                href="mailto:info@aims-education.com"
-                text="info@aims-education.com"
-                label="General Inquiries"
-              />
-            </div> */}
-
-            {/* Social Media Section */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl text-center">
+          {/* Social Media Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-8"
+          >
+            <div className="bg-white rounded-2xl p-8 shadow-xl text-center max-w-md mx-auto">
               <h3 className="text-2xl font-heading font-bold mb-6 text-gray-900">
                 Follow Us on Social Media
               </h3>

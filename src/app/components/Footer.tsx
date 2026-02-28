@@ -8,19 +8,18 @@ const Footer = () => {
 
   const footerLinks = {
     services: [
-      { name: "IELTS Training", href: "#services" },
-      { name: "CELPIP Training", href: "#services" },
-      { name: "PTE Coaching", href: "#services" },
-      { name: "French Language", href: "#services" },
-      { name: "Immigration Consultancy", href: "#services" },
-      { name: "Visa Services", href: "#services" },
-      { name: "Canada PR Guide", href: "#services" },
+      { name: "IELTS Training", href: "/#services" },
+      { name: "CELPIP Training", href: "/#services" },
+      { name: "PTE Coaching", href: "/#services" },
+      { name: "French Language", href: "/#services" },
+      { name: "Immigration Consultancy", href: "/#services" },
+      { name: "Visa Services", href: "/#services" },
+      { name: "Canada PR Guide", href: "/#services" },
     ],
     company: [
-      { name: "About Us", href: "#home" },
-      { name: "Our Gallery", href: "#gallery" },
-      { name: "Testimonials", href: "#testimonials" },
-      { name: "Contact", href: "#contact" },
+      { name: "About Us", href: "/#home" },
+      { name: "Testimonials", href: "/#testimonials" },
+      { name: "Contact", href: "/#contact" },
     ],
   };
 

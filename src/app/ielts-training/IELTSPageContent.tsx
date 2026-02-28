@@ -156,7 +156,7 @@ const IELTSPageContent = () => {
                             className="flex flex-col sm:flex-row gap-4 justify-center"
                         >
                             <Link
-                                href="#contact"
+                                href="/#contact"
                                 className="inline-flex items-center justify-center space-x-2 px-8 py-4 gradient-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
                             >
                                 <span>Book Free Demo Class</span>

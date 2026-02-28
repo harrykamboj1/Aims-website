@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
 import { Bars } from "react-loader-spinner";
-import Gallery from "./components/Gallery";
+// import Gallery from "./components/Gallery";
 import Services from "./components/Services";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
@@ -45,7 +45,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <Services />
-      <Gallery />
+      {/* <Gallery /> */}
       <Testimonial />
       <ContactForm />
       <Footer />
