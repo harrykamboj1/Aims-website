@@ -203,9 +203,11 @@ const Testimonial = ({ service, showAddReviewButton = true }: TestimonialProps) 
                           </div>
 
                           {/* Review Text */}
-                          <p className="text-gray-700 mb-6 leading-relaxed flex-1 text-balance">
-                            &quot;{testimonial.review}&quot;
-                          </p>
+                          <div className="flex-1 max-h-[300px] overflow-y-auto pr-2 mb-6 scrollbar-thin">
+                            <p className="text-gray-700 leading-relaxed text-balance">
+                              &quot;{testimonial.review}&quot;
+                            </p>
+                          </div>
 
                           {/* Author */}
                           <div className="pt-6 border-t border-gray-100">

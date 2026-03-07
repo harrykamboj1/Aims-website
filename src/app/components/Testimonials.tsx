@@ -142,7 +142,7 @@ const Testimonials = ({
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all relative group"
+                                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all relative group flex flex-col h-full"
                             >
                                 {/* Quote Icon */}
                                 <div className="absolute -top-4 -left-4 w-10 h-10 gradient-primary rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -155,20 +155,22 @@ const Testimonials = ({
                                         <Star
                                             key={i}
                                             className={`w-5 h-5 ${i < review.rating
-                                                    ? "text-yellow-400 fill-current"
-                                                    : "text-gray-300"
+                                                ? "text-yellow-400 fill-current"
+                                                : "text-gray-300"
                                                 }`}
                                         />
                                     ))}
                                 </div>
 
                                 {/* Review Text */}
-                                <p className="text-gray-600 mb-6 leading-relaxed italic">
-                                    &quot;{review.review}&quot;
-                                </p>
+                                <div className="max-h-48 overflow-y-auto pr-2 mb-6 scrollbar-thin">
+                                    <p className="text-gray-600 leading-relaxed italic">
+                                        &quot;{review.review}&quot;
+                                    </p>
+                                </div>
 
                                 {/* Reviewer Info */}
-                                <div className="border-t border-gray-100 pt-4">
+                                <div className="border-t border-gray-100 pt-4 mt-auto">
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="font-bold text-gray-900">{review.name}</p>

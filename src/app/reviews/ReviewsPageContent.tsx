@@ -144,7 +144,7 @@ const ReviewsPageContent = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.05 }}
-                                    className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all border border-gray-100"
+                                    className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all border border-gray-100 flex flex-col h-full"
                                 >
                                     {/* Rating */}
                                     <div className="flex items-center justify-between mb-3">
@@ -165,12 +165,14 @@ const ReviewsPageContent = () => {
                                     </div>
 
                                     {/* Review Text */}
-                                    <p className="text-gray-600 mb-4 leading-relaxed text-sm">
-                                        &quot;{review.review}&quot;
-                                    </p>
+                                    <div className="flex-1 max-h-48 overflow-y-auto pr-2 mb-4 scrollbar-thin">
+                                        <p className="text-gray-600 leading-relaxed text-sm">
+                                            &quot;{review.review}&quot;
+                                        </p>
+                                    </div>
 
                                     {/* Reviewer Info */}
-                                    <div className="flex items-center justify-between">
+                                    <div className="flex items-center justify-between mt-auto">
                                         <div>
                                             <p className="font-semibold text-gray-900 text-sm">
                                                 {review.name}
