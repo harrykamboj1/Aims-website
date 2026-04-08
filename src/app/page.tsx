@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import { Bars } from "react-loader-spinner";
 // import Gallery from "./components/Gallery";
 import Services from "./components/Services";
+import AboutUs from "./components/AboutUs";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 import Testimonial from "./components/testimonial";
@@ -45,6 +46,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <Services />
+      <AboutUs />
       {/* <Gallery /> */}
       <Testimonial />
       <ContactForm />
