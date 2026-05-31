@@ -177,7 +177,7 @@ const Services = () => {
   ];
 
   const stats = [
-    { icon: Users, value: "500+", label: "Students Trained" },
+    { icon: Users, value: "3000+", label: "Students Trained" },
     { icon: Award, value: "95%", label: "Success Rate" },
     { icon: Clock, value: "24/7", label: "Support Available" },
     { icon: Globe, value: "India & Canada", label: "Countries Present" },

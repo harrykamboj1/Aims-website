@@ -12,7 +12,7 @@ const HeroSection = () => {
   };
 
   const stats = [
-    { icon: Users, value: "500+", label: "Successful Students" },
+    { icon: Users, value: "3000+", label: "Successful Students" },
     { icon: Award, value: "95%", label: "Success Rate" },
     { icon: Globe, value: "India & Canada ", label: "Countries Present" },
   ];
@@ -51,7 +51,7 @@ const HeroSection = () => {
               className="inline-flex items-center space-x-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm"
             >
               <Award className="w-4 h-4" />
-              <span>Trusted by 500+ Students Worldwide</span>
+              <span>Trusted by 3000+ Students Worldwide</span>
             </motion.div>
 
             <motion.h1
