@@ -28,21 +28,29 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary-blue))",
-          dark: "hsl(var(--primary-blue-dark))",
-          light: "hsl(var(--primary-blue-light))",
+          DEFAULT: "hsl(var(--navy))",
+          dark: "hsl(var(--navy-dark))",
+          light: "hsl(var(--navy-light))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
+          DEFAULT: "hsl(var(--royal))",
+          light: "hsl(var(--royal-light))",
           foreground: "hsl(var(--secondary-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent-indigo))",
-          dark: "hsl(var(--accent-indigo-dark))",
-          teal: "hsl(var(--accent-teal))",
-          "teal-light": "hsl(var(--accent-teal-light))",
+          DEFAULT: "hsl(var(--red))",
+          light: "hsl(var(--red-light))",
           foreground: "hsl(var(--accent-foreground))",
+        },
+        navy: {
+          DEFAULT: "hsl(var(--navy))",
+          light: "hsl(var(--navy-light))",
+          dark: "hsl(var(--navy-dark))",
+        },
+        royal: {
+          DEFAULT: "hsl(var(--royal))",
+          light: "hsl(var(--royal-light))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -52,12 +60,6 @@ const config = {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
-        success: {
-          DEFAULT: "hsl(var(--success-green))",
-        },
-        warning: {
-          DEFAULT: "hsl(var(--warning-orange))",
-        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -66,13 +68,20 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Legacy support
-        mainPurple: "hsl(var(--primary-blue))",
-        lightPink: "hsl(var(--primary-blue-light))",
+        cream: "hsl(var(--cream))",
+        success: {
+          DEFAULT: "hsl(142 76% 36%)",
+        },
+        warning: {
+          DEFAULT: "hsl(38 92% 50%)",
+        },
+        mainPurple: "hsl(var(--navy))",
+        lightPink: "hsl(var(--royal-light))",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        heading: ["var(--font-poppins)", "sans-serif"],
+        sans: ["var(--font-dm-sans)", "sans-serif"],
+        heading: ["var(--font-playfair)", "serif"],
+        display: ["var(--font-playfair)", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -93,12 +102,22 @@ const config = {
             transform: "translate(calc(-50% - 0.5rem))",
           },
         },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(24px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+        "fade-up": "fade-up 0.6s ease-out forwards",
+        float: "float 4s ease-in-out infinite",
       },
     },
   },

@@ -1,85 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Instagram,
   MapPin,
   Phone,
-  MessageCircle,
   Mail,
   User,
   Send,
   CheckCircle,
   AlertCircle,
   Loader2,
-  BookOpen,
 } from "lucide-react";
 import { saveContactSubmission } from "@/lib/supabase";
 import { sendContactEmail } from "@/lib/email";
-
-interface ContactItemProps {
-  icon: React.ElementType;
-  href?: string;
-  text: React.ReactNode;
-  label?: string;
-}
-
-const ContactItem = ({ icon: Icon, href, text, label }: ContactItemProps) => (
-  <motion.div
-    whileHover={{ scale: 1.05, y: -5 }}
-    className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group"
-  >
-    <div className="flex items-start space-x-4">
-      <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-        <Icon className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
-      </div>
-      <div className="flex-1">
-        {label && (
-          <p className="text-sm font-semibold text-gray-500 mb-1">{label}</p>
-        )}
-        {href ? (
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 hover:text-primary text-lg font-semibold transition-colors block"
-          >
-            {text}
-          </a>
-        ) : (
-          <span className="text-gray-900 text-lg font-semibold block">
-            {text}
-          </span>
-        )}
-      </div>
-    </div>
-  </motion.div>
-);
-
-const SocialIcon = ({
-  href,
-  icon: Icon,
-  label,
-}: {
-  href: string;
-  icon: React.ElementType;
-  label: string;
-}) => (
-  <motion.a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex flex-col items-center space-y-2 p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 group"
-    whileHover={{ scale: 1.1, y: -5 }}
-    whileTap={{ scale: 0.95 }}
-    aria-label={label}
-  >
-    <Icon className="w-8 h-8 text-gray-600 group-hover:text-primary transition-colors" />
-    <span className="text-sm text-gray-600 group-hover:text-primary font-medium">
-      {label}
-    </span>
-  </motion.a>
-);
 
 interface FormData {
   name: string;
@@ -90,6 +24,17 @@ interface FormData {
 }
 
 type FormStatus = "idle" | "loading" | "success" | "error";
+
+const services = [
+  "IELTS Training",
+  "PTE Coaching",
+  "CELPIP Training",
+  "French / TCF Training",
+  "Immigration Consultancy",
+  "Visa Approval Services",
+  "Canada PR Guidance",
+  "Other",
+];
 
 const ContactForm = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -102,24 +47,10 @@ const ContactForm = () => {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const services = [
-    "IELTS Training",
-    "PTE Coaching",
-    "CELPIP Training",
-    "French Language Training",
-    "Immigration Consultancy",
-    "Visa Approval Services",
-    "Canada PR Guidance",
-    "Other",
-  ];
-
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -128,145 +59,228 @@ const ContactForm = () => {
     setErrorMessage("");
 
     try {
-      // Save to Supabase
       await saveContactSubmission(formData);
-
-      // Send email notification
       await sendContactEmail(formData);
-
       setStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        service: "",
-        message: "",
-      });
-
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setStatus("idle");
-      }, 5000);
-    } catch (error) {
-      console.error("Error submitting form:", error);
+      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch {
       setStatus("error");
-      setErrorMessage(
-        "Something went wrong. Please try again or contact us directly."
-      );
+      setErrorMessage("Something went wrong. Please try again or call us directly.");
     }
   };
 
   return (
-    <section
-      id="contact"
-      className="section-padding bg-gradient-to-br from-primary/5 via-white to-accent/5 relative overflow-hidden"
-    >
-      {/* Background Decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
-      </div>
+    <section id="contact" className="section-padding bg-cream relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-royal/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container-custom relative z-10">
-        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center max-w-2xl mx-auto mb-14"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6"
-          >
-            <MessageCircle className="w-4 h-4" />
+          <div className="section-label justify-center mb-4">
             <span>Get In Touch</span>
-          </motion.div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6">
-            Let&apos;s Start Your{" "}
-            <span className="gradient-text">Journey Together</span>
+          </div>
+          <h2 className="heading-display text-3xl md:text-5xl mb-4">
+            Start Your Journey Today
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto text-balance">
-            Have questions? We&apos;re here to help! Fill out the form below and
-            our team will get back to you within 24 hours.
+          <p className="text-muted-foreground text-lg">
+            Book a free demo class or ask us anything. We respond within 24 hours.
           </p>
         </motion.div>
 
-        {/* Contact Information */}
-        <div className="max-w-4xl mx-auto">
+        <div className="grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+          {/* Contact info */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid md:grid-cols-2 gap-8"
+            className="lg:col-span-2 space-y-4"
           >
-            {/* Locations Section */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h3 className="text-2xl font-heading font-bold mb-6 text-gray-900 flex items-center space-x-2">
-                <MapPin className="w-6 h-6 text-primary" />
-                <span>Our Locations</span>
+            <div className="card-elevated p-6">
+              <h3 className="font-heading text-lg font-bold text-navy mb-4 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-accent" />
+                Our Locations
               </h3>
-              <div className="space-y-4">
-                <ContactItem
-                  icon={MapPin}
-                  text="Surrey, Canada"
-                  label="Canada Office"
-                />
-                <ContactItem
-                  icon={MapPin}
-                  text="Ferozepur, India"
-                  label="India Office"
-                />
+              <div className="space-y-3">
+                <div className="p-3 bg-cream rounded-lg">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">Canada</p>
+                  <p className="text-navy font-medium">Surrey, Canada</p>
+                </div>
+                <div className="p-3 bg-cream rounded-lg">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">India</p>
+                  <p className="text-navy font-medium">Ferozepur, India</p>
+                </div>
               </div>
             </div>
 
-            {/* Phone Numbers Section */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h3 className="text-2xl font-heading font-bold mb-6 text-gray-900 flex items-center space-x-2">
-                <Phone className="w-6 h-6 text-primary" />
-                <span>Contact Numbers</span>
+            <div className="card-elevated p-6">
+              <h3 className="font-heading text-lg font-bold text-navy mb-4 flex items-center gap-2">
+                <Phone className="w-5 h-5 text-accent" />
+                Call Us
               </h3>
-              <div className="space-y-4">
-                <ContactItem
-                  icon={Phone}
-                  href="tel:+16728667556"
-                  text="+1 672 866 7556"
-                  label="Phone (Canada)"
-                />
-                <ContactItem
-                  icon={Phone}
-                  href="tel:+917889225504"
-                  text="+91 78892 25504"
-                  label="Phone (India)"
-                />
+              <div className="space-y-3">
+                <a href="tel:+16728667556" className="block p-3 bg-cream rounded-lg hover:bg-royal-light/50 transition-colors">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">Canada</p>
+                  <p className="text-navy font-semibold">+1 672 866 7556</p>
+                </a>
+                <a href="tel:+917889225504" className="block p-3 bg-cream rounded-lg hover:bg-royal-light/50 transition-colors">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">India</p>
+                  <p className="text-navy font-semibold">+91 78892 25504</p>
+                </a>
               </div>
             </div>
+
+            <a
+              href="https://www.instagram.com/aims_604/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-elevated p-6 flex items-center gap-4 hover:-translate-y-0.5 transition-transform group"
+            >
+              <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl">
+                <Instagram className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="font-semibold text-navy group-hover:text-accent transition-colors">@aims_604</p>
+                <p className="text-sm text-muted-foreground">Follow us on Instagram</p>
+              </div>
+            </a>
           </motion.div>
 
-          {/* Social Media Section */}
+          {/* Form */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-8"
+            className="lg:col-span-3"
           >
-            <div className="bg-white rounded-2xl p-8 shadow-xl text-center max-w-md mx-auto">
-              <h3 className="text-2xl font-heading font-bold mb-6 text-gray-900">
-                Follow Us on Social Media
-              </h3>
-              <div className="flex justify-center">
-                <SocialIcon
-                  href="https://www.instagram.com/aims_604/"
-                  icon={Instagram}
-                  label="Instagram"
+            <form onSubmit={handleSubmit} className="card-elevated p-8 space-y-5">
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-navy mb-1.5">
+                    Full Name
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-navy/30" />
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full pl-10 pr-4 py-3 bg-cream border border-navy/10 rounded-lg text-navy placeholder:text-navy/30 focus:outline-none focus:ring-2 focus:ring-royal/30 focus:border-royal transition-all"
+                      placeholder="Your name"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-navy mb-1.5">
+                    Email
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-navy/30" />
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full pl-10 pr-4 py-3 bg-cream border border-navy/10 rounded-lg text-navy placeholder:text-navy/30 focus:outline-none focus:ring-2 focus:ring-royal/30 focus:border-royal transition-all"
+                      placeholder="you@email.com"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-navy mb-1.5">
+                    Phone
+                  </label>
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-navy/30" />
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full pl-10 pr-4 py-3 bg-cream border border-navy/10 rounded-lg text-navy placeholder:text-navy/30 focus:outline-none focus:ring-2 focus:ring-royal/30 focus:border-royal transition-all"
+                      placeholder="+1 234 567 8900"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="service" className="block text-sm font-medium text-navy mb-1.5">
+                    Service Interested In
+                  </label>
+                  <select
+                    id="service"
+                    name="service"
+                    required
+                    value={formData.service}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-cream border border-navy/10 rounded-lg text-navy focus:outline-none focus:ring-2 focus:ring-royal/30 focus:border-royal transition-all"
+                  >
+                    <option value="">Select a service</option>
+                    {services.map((s) => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-navy mb-1.5">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 bg-cream border border-navy/10 rounded-lg text-navy placeholder:text-navy/30 focus:outline-none focus:ring-2 focus:ring-royal/30 focus:border-royal transition-all resize-none"
+                  placeholder="Tell us about your goals..."
                 />
               </div>
-            </div>
+
+              {status === "success" && (
+                <div className="flex items-center gap-2 p-4 bg-green-50 text-green-700 rounded-lg text-sm">
+                  <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                  Thank you! We&apos;ll get back to you within 24 hours.
+                </div>
+              )}
+              {status === "error" && (
+                <div className="flex items-center gap-2 p-4 bg-red-50 text-red-700 rounded-lg text-sm">
+                  <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                  {errorMessage}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="btn-primary w-full !py-4 disabled:opacity-60"
+              >
+                {status === "loading" ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
           </motion.div>
         </div>
       </div>

@@ -1,166 +1,217 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 
+const navItems = [
+  { name: "Home", id: "home" },
+  { name: "Programs", id: "programs" },
+  { name: "About", id: "about" },
+  { name: "Reviews", id: "testimonials" },
+  { name: "Contact", id: "contact" },
+];
+
+const programLinks = [
+  { name: "IELTS Training", href: "/ielts-training" },
+  { name: "PTE Coaching", href: "/pte-training" },
+  { name: "CELPIP Training", href: "/celpip-training" },
+  { name: "French / TCF", href: "/french-training" },
+];
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState("Home");
+  const [programsOpen, setProgramsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      setScrolled(isScrolled);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
-  const handleMenuClick = (menu: string) => {
-    setActiveMenu(menu);
+  const handleNavClick = (id: string) => {
     setIsMenuOpen(false);
-    const sectionId = menu.toLowerCase();
-
     if (pathname === "/") {
-      // On home page, scroll to section directly
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     } else {
-      // On subpages, navigate to home page with hash
-      router.push(`/#${sectionId}`);
+      router.push(`/#${id}`);
     }
   };
 
-  const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services" },
-    { name: "About", href: "#about" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "Contact", href: "#contact" },
-  ];
+  const goHome = () => {
+    setIsMenuOpen(false);
+    if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (window.location.hash) {
+        window.history.replaceState(null, "", "/");
+      }
+    } else {
+      router.push("/");
+    }
+  };
 
   return (
-    <nav
-      className={`fixed w-full z-50 top-0 left-0 transition-all duration-300 ${scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-lg"
-          : "bg-white/80 backdrop-blur-sm"
-        }`}
+    <header
+      className={`fixed w-full z-50 top-0 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur-md shadow-[0_2px_20px_rgba(26,43,86,0.08)]"
+          : "bg-white/70 backdrop-blur-sm"
+      }`}
     >
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <motion.a
+      {/* Top accent bar */}
+      <div className="h-1 gradient-navy" />
+
+      <nav className="container-custom">
+        <div className="flex items-center justify-between h-[72px] lg:h-20">
+          <Link
             href="/"
-            className="flex items-center space-x-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            onClick={(e) => {
+              setIsMenuOpen(false);
+              if (pathname === "/") {
+                e.preventDefault();
+                goHome();
+              }
+            }}
+            className="flex-shrink-0"
+            aria-label="Go to AIMS home page"
           >
-            <div className="flex items-center space-x-2">
-              {/* Logo Icon/Shape */}
-              <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center shadow-md">
-                <span className="text-white font-heading font-bold text-xl">
-                  A
-                </span>
-              </div>
-              {/* Logo Text */}
-              <div className="flex flex-col">
-                <span className="text-2xl font-heading font-bold gradient-text leading-none">
-                  Aims
-                </span>
-                {/* <span className="text-xs text-gray-500 font-medium leading-none mt-0.5">
-                  Education
-                </span> */}
-              </div>
-            </div>
-          </motion.a>
+            <Image
+              src="/logo.png"
+              alt="AIMS - Achieve Improve Master Succeed"
+              width={140}
+              height={56}
+              className="h-12 lg:h-14 w-auto object-contain"
+              priority
+            />
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => handleMenuClick(item.name)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${activeMenu === item.name
-                    ? "bg-primary text-white shadow-md"
-                    : "text-gray-700 hover:text-primary hover:bg-primary/10"
-                  }`}
-              >
-                {item.name}
-              </button>
-            ))}
+          {/* Desktop nav */}
+          <div className="hidden lg:flex items-center gap-1">
+            {navItems.map((item) =>
+              item.id === "programs" ? (
+                <div
+                  key={item.name}
+                  className="relative"
+                  onMouseEnter={() => setProgramsOpen(true)}
+                  onMouseLeave={() => setProgramsOpen(false)}
+                >
+                  <button
+                    className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-navy/80 hover:text-navy rounded-lg hover:bg-navy/5 transition-colors"
+                  >
+                    {item.name}
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform ${programsOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {programsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        className="absolute top-full left-0 mt-1 w-56 bg-white rounded-xl shadow-[0_8px_30px_rgba(26,43,86,0.12)] border border-navy/10 py-2 overflow-hidden"
+                      >
+                        {programLinks.map((link) => (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            className="block px-4 py-2.5 text-sm text-navy/80 hover:text-navy hover:bg-royal-light/50 transition-colors"
+                          >
+                            {link.name}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.id)}
+                  className="px-4 py-2 text-sm font-medium text-navy/80 hover:text-navy rounded-lg hover:bg-navy/5 transition-colors"
+                >
+                  {item.name}
+                </button>
+              )
+            )}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <Button
-              onClick={() => handleMenuClick("Contact")}
-              className="gradient-primary text-white hover:opacity-90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-full px-6 py-2.5 font-semibold"
+          <div className="hidden lg:flex items-center gap-3">
+            <a
+              href="tel:+16728667556"
+              className="flex items-center gap-2 text-sm font-medium text-navy/70 hover:text-navy transition-colors"
             >
-              Get Started
-            </Button>
+              <Phone className="w-4 h-4 text-accent" />
+              +1 672 866 7556
+            </a>
+            <button onClick={() => handleNavClick("contact")} className="btn-primary text-sm !py-2.5 !px-5">
+              Free Demo Class
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             type="button"
-            className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
-            onClick={toggleMenu}
+            className="lg:hidden p-2 rounded-lg text-navy hover:bg-navy/5"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-gray-200"
+            className="lg:hidden bg-white border-t border-navy/10"
           >
-            <div className="container-custom py-4 space-y-2">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => handleMenuClick(item.name)}
-                  className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all ${activeMenu === item.name
-                      ? "bg-primary text-white"
-                      : "text-gray-700 hover:bg-primary/10 hover:text-primary"
-                    }`}
-                >
-                  {item.name}
-                </button>
-              ))}
-              <Button
-                onClick={() => handleMenuClick("Contact")}
-                className="w-full mt-4 gradient-primary text-white rounded-full py-3 font-semibold"
+            <div className="container-custom py-4 space-y-1">
+              {navItems.map((item) =>
+                item.id === "programs" ? (
+                  <div key={item.name} className="space-y-1">
+                    <p className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-navy/40">
+                      Programs
+                    </p>
+                    {programLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block px-4 py-2.5 text-navy/80 hover:text-navy hover:bg-navy/5 rounded-lg"
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <button
+                    key={item.name}
+                    onClick={() => handleNavClick(item.id)}
+                    className="w-full text-left px-4 py-3 text-navy/80 hover:text-navy hover:bg-navy/5 rounded-lg font-medium"
+                  >
+                    {item.name}
+                  </button>
+                )
+              )}
+              <button
+                onClick={() => handleNavClick("contact")}
+                className="w-full btn-primary mt-3 !py-3"
               >
-                Get Started
-              </Button>
+                Book Free Demo Class
+              </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 };
 

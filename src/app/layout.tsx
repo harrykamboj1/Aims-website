@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { DM_Sans, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
-const poppins = Poppins({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     siteName: "AIMS",
     images: [
       {
-        url: "/AIMS_LIGHT.png",
+        url: "/logo.png",
         width: 1200,
         height: 630,
         alt: "AIMS - Language Training & Immigration Services",
@@ -121,7 +121,7 @@ export const metadata: Metadata = {
     title: "AIMS - Expert IELTS, PTE, CELPIP & French Language Training",
     description:
       "Master IELTS, PTE, CELPIP, and French with expert guidance. Professional language training and immigration consultancy.",
-    images: ["/AIMS_LIGHT.png"],
+    images: ["/logo.png"],
   },
   robots: {
     index: true,
@@ -145,7 +145,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${playfair.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href="https://aims-education.com" />
@@ -159,7 +159,7 @@ export default function RootLayout({
               description:
                 "Expert IELTS, PTE, CELPIP, and French language training with immigration consultancy services",
               url: "https://aims-education.com",
-              logo: "https://aims-education.com/AIMS_LIGHT.png",
+              logo: "https://aims-education.com/logo.png",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Surrey",
@@ -204,7 +204,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${dmSans.className} antialiased`}>
         {children}
         <Analytics />
       </body>

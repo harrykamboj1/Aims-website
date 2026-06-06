@@ -21,6 +21,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Testimonial from "../components/testimonial";
 import ReviewForm from "../components/ReviewForm";
+import PageHero from "../components/PageHero";
 
 const IELTSPageContent = () => {
   const modules = [
@@ -111,69 +112,17 @@ const IELTSPageContent = () => {
     <main className="min-h-screen">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-primary/10 via-white to-accent/10 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 left-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container-custom relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6"
-            >
-              <Award className="w-4 h-4" />
-              <span>#1 IELTS Training Center</span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight"
-            >
-              Master IELTS with{" "}
-              <span className="gradient-text">Expert Coaching</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-gray-600 mb-8 leading-relaxed"
-            >
-              Achieve your dream IELTS band score with our proven strategies,
-              expert instructors, and comprehensive training program. Join 3000+
-              successful students who&apos;ve transformed their scores!
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Link
-                href="/#contact"
-                className="inline-flex items-center justify-center space-x-2 px-8 py-4 gradient-primary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
-              >
-                <span>Book Free Demo Class</span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <a
-                href="tel:+16728667556"
-                className="inline-flex items-center justify-center space-x-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all border border-gray-200"
-              >
-                <Phone className="w-5 h-5" />
-                <span>Call Now</span>
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        badge="#1 IELTS Training Center"
+        badgeIcon={Award}
+        title={
+          <>
+            Master IELTS with{" "}
+            <span className="text-accent">Expert Coaching</span>
+          </>
+        }
+        description="Achieve your dream IELTS band score with our proven strategies, expert instructors, and comprehensive training program. Join 3000+ successful students who've transformed their scores!"
+      />
 
       {/* Stats Section */}
       <section className="py-12 bg-white">
