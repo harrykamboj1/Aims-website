@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import ValuesSection from "./components/ValuesSection";
 import ExamShowcase from "./components/ExamShowcase";
+import AppPromo from "./components/AppPromo";
 import Services from "./components/Services";
 import AboutUs from "./components/AboutUs";
 import ContactForm from "./components/ContactForm";
@@ -15,6 +16,7 @@ export default function Home() {
       <HeroSection />
       <ValuesSection />
       <ExamShowcase />
+      <AppPromo />
       <Services />
       <AboutUs />
       <Testimonial />

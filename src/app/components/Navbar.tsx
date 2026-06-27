@@ -9,6 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 const navItems = [
   { name: "Home", id: "home" },
   { name: "Programs", id: "programs" },
+  { name: "Apps", id: "apps" },
   { name: "About", id: "about" },
   { name: "Reviews", id: "testimonials" },
   { name: "Contact", id: "contact" },
