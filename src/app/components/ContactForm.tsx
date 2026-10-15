@@ -48,7 +48,9 @@ const ContactForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -66,12 +68,17 @@ const ContactForm = () => {
       setTimeout(() => setStatus("idle"), 5000);
     } catch {
       setStatus("error");
-      setErrorMessage("Something went wrong. Please try again or call us directly.");
+      setErrorMessage(
+        "Something went wrong. Please try again or call us directly."
+      );
     }
   };
 
   return (
-    <section id="contact" className="section-padding bg-cream relative overflow-hidden">
+    <section
+      id="contact"
+      className="section-padding bg-cream relative overflow-hidden"
+    >
       <div className="absolute top-0 right-0 w-96 h-96 bg-royal/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container-custom relative z-10">
@@ -88,7 +95,8 @@ const ContactForm = () => {
             Start Your Journey Today
           </h2>
           <p className="text-muted-foreground text-lg">
-            Book a free demo class or ask us anything. We respond within 24 hours.
+            Book a free demo class or ask us anything. We respond within 24
+            hours.
           </p>
         </motion.div>
 
@@ -107,11 +115,15 @@ const ContactForm = () => {
               </h3>
               <div className="space-y-3">
                 <div className="p-3 bg-cream rounded-lg">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">Canada</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">
+                    Canada
+                  </p>
                   <p className="text-navy font-medium">Surrey, Canada</p>
                 </div>
                 <div className="p-3 bg-cream rounded-lg">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">India</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">
+                    India
+                  </p>
                   <p className="text-navy font-medium">Ferozepur, India</p>
                 </div>
               </div>
@@ -123,12 +135,22 @@ const ContactForm = () => {
                 Call Us
               </h3>
               <div className="space-y-3">
-                <a href="tel:+16728667556" className="block p-3 bg-cream rounded-lg hover:bg-royal-light/50 transition-colors">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">Canada</p>
+                <a
+                  href="tel:+16728667556"
+                  className="block p-3 bg-cream rounded-lg hover:bg-royal-light/50 transition-colors"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">
+                    Canada
+                  </p>
                   <p className="text-navy font-semibold">+1 672 866 7556</p>
                 </a>
-                <a href="tel:+917889225504" className="block p-3 bg-cream rounded-lg hover:bg-royal-light/50 transition-colors">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">India</p>
+                <a
+                  href="tel:+917889225504"
+                  className="block p-3 bg-cream rounded-lg hover:bg-royal-light/50 transition-colors"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-wider text-navy/40 mb-0.5">
+                    India
+                  </p>
                   <p className="text-navy font-semibold">+91 78892 25504</p>
                 </a>
               </div>
@@ -144,14 +166,18 @@ const ContactForm = () => {
                 <Instagram className="w-5 h-5 text-white" />
               </div>
               <div>
-                <p className="font-semibold text-navy group-hover:text-accent transition-colors">@aims_604</p>
-                <p className="text-sm text-muted-foreground">Follow us on Instagram</p>
+                <p className="font-semibold text-navy group-hover:text-accent transition-colors">
+                  @aims_604
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Follow us on Instagram
+                </p>
               </div>
             </a>
           </motion.div>
 
           {/* Form */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -281,7 +307,7 @@ const ContactForm = () => {
                 )}
               </button>
             </form>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </section>
